@@ -1,5 +1,11 @@
 # Wally.Speedway
 
+## Rules
+
+[Wiki](https://en.wikipedia.org/wiki/Motorcycle_speedway)
+
+## Project setup
+
 ```
 mkdir wally.speedway
 cd wally.speedway
