@@ -8,6 +8,8 @@ window.onload = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     draw(ctx);
+    game.Start();
+    window.requestAnimationFrame(() => draw(ctx));
     console.info('Window Loaded', ctx);
 };
 const track = (ctx, x, y, w, h, radius) => {
@@ -34,4 +36,5 @@ const draw = (ctx) => {
     track(ctx, 100, 100 - 50, 500, 250, 38 * Math.PI);
     track(ctx, 0, 0, 700, 350, 54 * Math.PI);
     line(ctx, 350, 300, 350, 350);
+    game.Draw(ctx);
 };

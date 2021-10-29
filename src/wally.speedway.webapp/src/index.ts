@@ -14,7 +14,11 @@ window.onload = () => {
     canvas.height = window.innerHeight;
 
     draw(ctx);
-    
+
+    game.Start();
+
+    window.requestAnimationFrame(() => draw(ctx));
+
     console.info('Window Loaded', ctx);
 }
 
@@ -41,6 +45,8 @@ const line = (ctx: CanvasRenderingContext2D, x0:number, y0:number, x1:number, y1
 }
 
 const draw = (ctx: CanvasRenderingContext2D): void => {
+    ctx.clearRect(0, 0, 600, 600);
+
     line(ctx, 100, 100, 600, 600);
 
     track(ctx, 100, 100 - 50, 500, 250, 38 * Math.PI);
@@ -48,4 +54,6 @@ const draw = (ctx: CanvasRenderingContext2D): void => {
     track(ctx, 0, 0, 700, 350, 54 * Math.PI);
 
     line(ctx, 350, 300, 350, 350);
+
+    game.Draw(ctx);
 }
