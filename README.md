@@ -23,7 +23,6 @@ git push --set-upstream origin master
 ```
 
 Create `.gitignore`: [gitignore.io](https://www.toptal.com/developers/gitignore?templates=node)
-`
 
 Init NPM
 
@@ -52,7 +51,7 @@ Init NPM
 Init TS
 
 ```
-npm i typescript --save-dev
+npm i typescript -D
 tsc --init
 ```
 
@@ -60,4 +59,22 @@ Test
 
 ```
 node .\dist\main.js
-```                                                      
+```
+
+Init Webpack
+
+```
+npm i webpack webpack-cli ts-loader -D
+```
+
+Create `webpack.config.js`:
+
+```
+
+```
+
+Add Server
+
+```
+npm i webpack-dev-server -D
+```

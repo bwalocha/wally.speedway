@@ -1,7 +1,5 @@
-class Track {
+export default class Track {
 	constructor() {
 		console.log('Create Track');
 	}
 }
-
-export default Track;
