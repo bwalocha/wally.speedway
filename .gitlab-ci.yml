@@ -1,0 +1,47 @@
+variables:
+  WEB_PROJECT_NAME: "wally.speedway.webapp"
+  #
+  VERSION: "0.1.${CI_PIPELINE_ID}"
+  #CI_DEBUG_TRACE: "true"
+
+stages:
+  - build
+  - test
+  - publish
+  - deploy
+
+build:web:
+  extends:
+    - .build:node
+  variables:
+    PROJECT_NAME: ${WEB_PROJECT_NAME}
+
+test:web:
+  extends:
+    - .test:node
+  needs:
+    - build:web
+  variables:
+    PROJECT_NAME: ${WEB_PROJECT_NAME}
+
+publish:docker:web:
+  extends:
+    - .publish:docker
+  needs:
+    - test:web
+  variables:
+    PROJECT_NAME: ${WEB_PROJECT_NAME}
+
+deploy:container-station:
+  extends:
+    - .deploy:container-station
+  needs:
+    - publish:docker:web
+  variables:
+    ENV: PROD
+
+include:
+  - project: wally/wally.common.pipelines
+    ref: master
+    file:
+      - /src/gitlab-ci.yml
