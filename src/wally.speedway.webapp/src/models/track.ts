@@ -1,5 +1,5 @@
 export default class Track {
-	constructor() {
-		console.log('Create Track');
-	}
+    constructor() {
+        console.log('Create Track');
+    }
 }

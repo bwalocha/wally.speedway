@@ -1,4 +1,4 @@
-// import Track from "./models/track";
+import Track from "./models/track";
 
-console.info('Wally.Speedway');
-// const track = new Track();
+const track = new Track();
+console.info('Wally.Speedway', track);
