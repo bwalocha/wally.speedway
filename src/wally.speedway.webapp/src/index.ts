@@ -1,7 +1,10 @@
+import Game from "./services/Game";
 import Track from "./models/track";
 
 // const track = new Track();
 // console.info('Wally.Speedway', track);
+
+const game = new Game();
 
 window.onload = () => {
     const canvas = document.getElementById("canvas") as HTMLCanvasElement;
@@ -9,17 +12,8 @@ window.onload = () => {
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
-    ctx.beginPath();
-    ctx.moveTo(100, 100);
-    ctx.lineTo(600, 600);
-    ctx.stroke();
-    
-    track(ctx, 100, 100 - 50, 500, 250, 38 * Math.PI);
 
-    track(ctx, 0, 0, 700, 350, 54 * Math.PI);
-    
-    line(ctx, 350, 300, 350, 350);
+    draw(ctx);
     
     console.info('Window Loaded', ctx);
 }
@@ -44,4 +38,14 @@ const line = (ctx: CanvasRenderingContext2D, x0:number, y0:number, x1:number, y1
     ctx.moveTo(x0,y0);
     ctx.lineTo(x1, y1);
     ctx.stroke();
+}
+
+const draw = (ctx: CanvasRenderingContext2D): void => {
+    line(ctx, 100, 100, 600, 600);
+
+    track(ctx, 100, 100 - 50, 500, 250, 38 * Math.PI);
+
+    track(ctx, 0, 0, 700, 350, 54 * Math.PI);
+
+    line(ctx, 350, 300, 350, 350);
 }
