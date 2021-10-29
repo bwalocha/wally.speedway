@@ -79,7 +79,7 @@ Add Server
 npm i webpack-dev-server -D
 ```
 
-Pack `public` assets
+Pack `public` assets [doc](https://webpack.js.org/plugins/copy-webpack-plugin/)
 
 ```
 npm i copy-webpack-plugin -D

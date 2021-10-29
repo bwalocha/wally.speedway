@@ -7,7 +7,9 @@ module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: "public" }
+        {
+          from: "public"
+        }
       ],
     }),
   ],
@@ -16,12 +18,17 @@ module.exports = {
       {
         test: /\.ts$/,
         use: 'ts-loader',
-        include: [path.resolve(__dirname, 'src')]
+        include: [
+          path.resolve(__dirname, 'src')
+        ]
       }
     ]
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: [
+      '.ts',
+      '.js'
+    ]
   },
   output: {
     filename: 'index.js',

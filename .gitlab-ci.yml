@@ -23,6 +23,7 @@ test:web:
     - build:web
   variables:
     PROJECT_NAME: ${WEB_PROJECT_NAME}
+  allow_failure: true
 
 publish:docker:web:
   extends:
