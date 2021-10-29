@@ -19,6 +19,7 @@
   "author": "wally",
   "license": "MIT",
   "devDependencies": {
+    "copy-webpack-plugin": "^9.0.1",
     "ts-loader": "^9.2.6",
     "typescript": "^4.4.4",
     "webpack": "^5.61.0",
