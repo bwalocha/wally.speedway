@@ -2,9 +2,11 @@ import IClock from "../abstractions/IClock";
 import IVehicle from "../abstractions/IVehicle";
 import Guid from "../services/Guid";
 import { Location } from "../services/Location";
+import Draw from "../services/Draw";
 
 export default class Vehicle implements IVehicle {
     private _key = Guid.NewGuid();
+    private _style: string;
     public get Key() {
         return this._key;
     }
@@ -14,10 +16,11 @@ export default class Vehicle implements IVehicle {
     private _speed: number = 0;
     private _headingAngle: number = 0;
     private _steerAngle: number = 0;
-    private _wheelBaseLength: number = 100;
+    private _wheelBaseLength: number = 10;
 
-    constructor(location: Location) {
+    constructor(location: Location, style: string) {
         this._location = location;
+        this._style = style;
     }
 
     // public Turn(): void {
@@ -26,10 +29,16 @@ export default class Vehicle implements IVehicle {
     // }
 
     public Update(clock: IClock): void {
-
+        // console.log(this)
     }
 
     Draw(ctx: CanvasRenderingContext2D): void {
+        console.log(this);
+        Draw.Line(ctx,
+            this._location.x,
+            this._location.y,
+            this._location.x + this._wheelBaseLength,
+            this._location.y, this._style);
     }
 
     private getFrontWheelLocation(): Location {

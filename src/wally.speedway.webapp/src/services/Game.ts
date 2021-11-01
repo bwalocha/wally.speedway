@@ -8,10 +8,10 @@ export default class Game {
 
     constructor() {
         this._players = [
-            new Player("A", { x: 100, y: 100 }),
-            new Player("B", { x: 100, y: 150 }),
-            new Player("C", { x: 100, y: 200 }),
-            new Player("D", { x: 100, y: 250 }),
+            new Player("A", { x: 340, y: 310 }, "#FF0000"),
+            new Player("B", { x: 340, y: 320 }, "#00FF00"),
+            new Player("C", { x: 340, y: 330 }, "#0000FF"),
+            new Player("D", { x: 340, y: 340 }, "#AAAAAA"),
         ];
     }
 
@@ -29,5 +29,6 @@ export default class Game {
 
     public Draw(ctx: CanvasRenderingContext2D) {
         ctx.fillText(`[${this._clock.GetTimestamp()}]`, 100, 200);
+        this._players.forEach(a => a.Draw(ctx));
     }
 }

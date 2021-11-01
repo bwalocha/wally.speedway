@@ -56,4 +56,5 @@ const draw = (ctx: CanvasRenderingContext2D): void => {
     line(ctx, 350, 300, 350, 350);
 
     game.Draw(ctx);
+    game.Update();
 }
