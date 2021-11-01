@@ -29,11 +29,12 @@ export default class Vehicle implements IVehicle {
     // }
 
     public Update(clock: IClock): void {
-        // console.log(this)
+        console.log(this)
+        this._location.x+=1;
     }
 
     Draw(ctx: CanvasRenderingContext2D): void {
-        console.log(this);
+        // console.log(this);
         Draw.Line(ctx,
             this._location.x,
             this._location.y,

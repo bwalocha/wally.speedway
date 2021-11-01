@@ -5,8 +5,10 @@ import Clock from "./../services/Clock";
 export default class Game {
     private _players: Player[] = [];
     private _clock: Clock = new Clock();
+    private readonly _ctx: CanvasRenderingContext2D;
 
-    constructor() {
+    constructor(ctx: CanvasRenderingContext2D) {
+        this._ctx = ctx;
         this._players = [
             new Player("A", { x: 340, y: 310 }, "#FF0000"),
             new Player("B", { x: 340, y: 320 }, "#00FF00"),
@@ -21,14 +23,17 @@ export default class Game {
 
     public Start():void {
         this._clock.Start();
+        this.Draw(0);
     }
 
-    public Update(): void {
+    private Update(): void {
         this._players.forEach(a => a.Update(this._clock));
     }
 
-    public Draw(ctx: CanvasRenderingContext2D) {
-        ctx.fillText(`[${this._clock.GetTimestamp()}]`, 100, 200);
-        this._players.forEach(a => a.Draw(ctx));
+    private Draw(timestamp: number) {
+        this.Update();
+        this._ctx.fillText(`[${this._clock.GetTimestamp()}]`, 100, 200);
+        this._players.forEach(a => a.Draw(this._ctx));
+        requestAnimationFrame(this.Draw.bind(this));
     }
 }

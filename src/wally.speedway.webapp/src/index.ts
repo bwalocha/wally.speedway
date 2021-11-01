@@ -1,10 +1,4 @@
 import Game from "./services/Game";
-import Track from "./models/track";
-
-// const track = new Track();
-// console.info('Wally.Speedway', track);
-
-const game = new Game();
 
 window.onload = () => {
     const canvas = document.getElementById("canvas") as HTMLCanvasElement;
@@ -15,9 +9,10 @@ window.onload = () => {
 
     draw(ctx);
 
+    const game = new Game(ctx);
     game.Start();
 
-    window.requestAnimationFrame(() => draw(ctx));
+    // window.requestAnimationFrame(game.Draw);
 
     console.info('Window Loaded', ctx);
 }
@@ -55,6 +50,6 @@ const draw = (ctx: CanvasRenderingContext2D): void => {
 
     line(ctx, 350, 300, 350, 350);
 
-    game.Draw(ctx);
-    game.Update();
+    // game.Draw(ctx);
+    // game.Update();
 }
