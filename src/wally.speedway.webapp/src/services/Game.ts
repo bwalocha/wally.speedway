@@ -8,10 +8,10 @@ export default class Game {
 
     constructor() {
         this._players = [
-            new Player("A"),
-            new Player("B"),
-            new Player("C"),
-            new Player("D")
+            new Player("A", { x: 100, y: 100 }),
+            new Player("B", { x: 100, y: 150 }),
+            new Player("C", { x: 100, y: 200 }),
+            new Player("D", { x: 100, y: 250 }),
         ];
     }
 

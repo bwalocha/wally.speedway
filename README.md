@@ -3,6 +3,7 @@
 ## Rules
 
 [Wiki](https://en.wikipedia.org/wiki/Motorcycle_speedway)
+[Steering](http://engineeringdotnet.blogspot.com/2010/04/simple-2d-car-physics-in-games.html)
 
 ## Project setup
 

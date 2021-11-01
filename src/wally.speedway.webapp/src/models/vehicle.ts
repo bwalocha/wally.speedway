@@ -1,18 +1,83 @@
 import IClock from "../abstractions/IClock";
+import IVehicle from "../abstractions/IVehicle";
+import Guid from "../services/Guid";
+import { Location } from "../services/Location";
 
-export default class Vehicle {
-    private _velocity: number = 0;
-    private _angle: number = 0;
-
-    constructor() {
+export default class Vehicle implements IVehicle {
+    private _key = Guid.NewGuid();
+    public get Key() {
+        return this._key;
     }
 
-    public Turn(): void {
-        this._angle += 0.1;
-        this._velocity -= 0.1;
+    private _location: Location;
+    // private _velocity: number = 0;
+    private _speed: number = 0;
+    private _headingAngle: number = 0;
+    private _steerAngle: number = 0;
+    private _wheelBaseLength: number = 100;
+
+    constructor(location: Location) {
+        this._location = location;
     }
+
+    // public Turn(): void {
+    //     this._angle += 0.1;
+    //     this._velocity -= 0.1;
+    // }
 
     public Update(clock: IClock): void {
 
+    }
+
+    Draw(ctx: CanvasRenderingContext2D): void {
+    }
+
+    private getFrontWheelLocation(): Location {
+        const dx = this._wheelBaseLength / 2 * Math.cos(this._headingAngle);
+        const dy = this._wheelBaseLength / 2 * Math.sin(this._headingAngle);
+        return {
+            x: this._location.x + dx,
+            y: this._location.y + dy
+        };
+    }
+
+    private getBackWheelLocation(): Location {
+        const dx = this._wheelBaseLength / 2 * Math.cos(this._headingAngle);
+        const dy = this._wheelBaseLength / 2 * Math.sin(this._headingAngle);
+        return {
+            x: this._location.x - dx,
+            y: this._location.y - dy
+        };
+    }
+
+    private getNextFrameFrontWheelLocation(dt: number): Location {
+        return {
+            x: this._speed * dt * Math.cos(this._headingAngle + this._steerAngle),
+            y: this._speed * dt * Math.sin(this._headingAngle + this._steerAngle)
+        }
+    }
+
+    private getNextFrameBackWheelLocation(dt: number): Location {
+        return {
+            x: this._speed * dt * Math.cos(this._headingAngle),
+            y: this._speed * dt * Math.sin(this._headingAngle)
+        }
+    }
+
+    private getNextFrameLocation(dt: number): Location {
+        const nextFrameFrontWheelLocation = this.getNextFrameFrontWheelLocation(dt);
+        const nextFrameBackWheelLocation = this.getNextFrameBackWheelLocation(dt);
+        return {
+            x: (nextFrameFrontWheelLocation.x + nextFrameBackWheelLocation.x)  / 2,
+            y: (nextFrameFrontWheelLocation.y + nextFrameBackWheelLocation.y)  / 2
+        }
+    }
+
+    private getNextFrameHeadingAngle(dt: number): number {
+        const nextFrameFrontWheelLocation = this.getNextFrameFrontWheelLocation(dt);
+        const nextFrameBackWheelLocation = this.getNextFrameBackWheelLocation(dt);
+
+        return Math.atan2(nextFrameFrontWheelLocation.y - nextFrameBackWheelLocation.y,
+            nextFrameFrontWheelLocation.x - nextFrameBackWheelLocation.x);
     }
 }
