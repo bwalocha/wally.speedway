@@ -85,3 +85,10 @@ Pack `public` assets [doc](https://webpack.js.org/plugins/copy-webpack-plugin/)
 ```
 npm i copy-webpack-plugin -D
 ```
+
+Unit Test
+
+```
+npm i -D jest ts-jest typescript
+npm i -D @types/jest
+```
