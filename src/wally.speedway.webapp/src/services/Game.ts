@@ -26,6 +26,14 @@ export default class Game {
         this.Draw(1);
     }
 
+    public StartTurn(playerIndex: number): void {
+        this._players[playerIndex].StartTurn(this._clock);
+    }
+
+    public EndTurn(playerIndex: number): void {
+        this._players[playerIndex].EndTurn(this._clock);
+    }
+
     private Update(): void {
         this._players.forEach(a => a.Update(this._clock));
     }

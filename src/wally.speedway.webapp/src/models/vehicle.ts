@@ -7,6 +7,7 @@ import Draw from "../services/Draw";
 export default class Vehicle implements IVehicle {
     private _key = Guid.NewGuid();
     private _style: string;
+    private _isTurning: boolean = false;
     public get Key() {
         return this._key;
     }
@@ -15,7 +16,7 @@ export default class Vehicle implements IVehicle {
     // private _velocity: number = 0;
     private _speed: number = 0.1;
     private _headingAngle: number = 0;
-    private _steerAngle: number = Math.PI / 180 * -4;
+    private _steerAngle: number = Math.PI / 180 * 0;
     private _wheelBaseLength: number = 10;
 
     constructor(location: Location, style: string) {
@@ -28,6 +29,19 @@ export default class Vehicle implements IVehicle {
     //     this._velocity -= 0.1;
     // }
 
+    public StartTurn(clock: IClock): void {
+        if (this._isTurning) {
+            return;
+        }
+
+        this._isTurning = true;
+        this._steerAngle += Math.PI / 180 * -1;
+    }
+
+    public EndTurn(clock: IClock): void {
+        this._isTurning = false;
+    }
+
     public Update(clock: IClock): void {
         // console.log(this)
         // this._location.x+=1;
@@ -37,6 +51,10 @@ export default class Vehicle implements IVehicle {
             x: this._location.x + d.x,
             y: this._location.y + d.y,
         };
+
+        if (this._isTurning){
+            this._steerAngle += Math.PI / 180 * -1;
+        }
     }
 
     Draw(ctx: CanvasRenderingContext2D): void {
