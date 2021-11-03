@@ -13,9 +13,9 @@ export default class Vehicle implements IVehicle {
 
     private _location: Location;
     // private _velocity: number = 0;
-    private _speed: number = 1;
+    private _speed: number = 0.1;
     private _headingAngle: number = 0;
-    private _steerAngle: number = 0;
+    private _steerAngle: number = Math.PI / 180 * -4;
     private _wheelBaseLength: number = 10;
 
     constructor(location: Location, style: string) {
