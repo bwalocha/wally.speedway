@@ -6,7 +6,6 @@ type Dictionary<T> = { [key: string]: T };
 export default class Clock implements IClock {
     private _status: "STARTED" | "STOPPED" = "STOPPED";
     private _startTimestamp: number = 0;
-    private _timers: Dictionary<number> = {};
 
     public get Timestamp(): number {
         return this._status === "STARTED" ? Date.now() - this._startTimestamp : 0;
@@ -23,11 +22,5 @@ export default class Clock implements IClock {
         }
         
         this._startTimestamp = Date.now();
-    }
-
-    public GetDelta(dynamicSprite: IDynamicSprite): number {
-        const lastDate = this._timers[dynamicSprite.Key];
-        this._timers[dynamicSprite.Key] = this.Timestamp;
-        return this._timers[dynamicSprite.Key] - lastDate;
     }
 }

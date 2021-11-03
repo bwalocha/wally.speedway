@@ -1,22 +1,17 @@
 import Vehicle from "./vehicle";
-import Clock from "./../services/Clock";
 
-jest.mock("./../services/Clock");
-
-describe('vehicle', () => {
+describe('Vehicle', () => {
     const location = {
         x: 0, 
         y: 0
     };
     const vehicle = new Vehicle(location, "#000000");
-    const clock = new Clock();
-
-    beforeEach(() => {
-        // Clear all instances and calls to constructor and all methods:
-        (Clock as jest.Mock).mockClear();
-    });
+    const clock = {
+        Start: jest.fn(),
+        Timestamp: 0,
+    };
     
-    it('init location', () => {
+    it('When not moved Has default data', () => {
         const data = vehicle.GetData();
         expect(data).toStrictEqual({
             "headingAngle": 0,
@@ -27,12 +22,13 @@ describe('vehicle', () => {
         });
     });
 
-    xit('next location', () => {
+    it('When in move Has updated data', () => {
+        clock.Timestamp = 10;
         vehicle.Update(clock);
         const data = vehicle.GetData();
         expect(data).toStrictEqual({
             "headingAngle": 0,
-            "location": location,
+            "location": { ...location, x: 10 },
             "speed": 1,
             "steerAngle": 0,
             "wheelBaseLength": 10,
