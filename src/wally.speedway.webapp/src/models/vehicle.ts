@@ -31,8 +31,12 @@ export default class Vehicle implements IVehicle {
     public Update(clock: IClock): void {
         // console.log(this)
         // this._location.x+=1;
-        console.log(this);
-        this._location = this.getNextFrameLocation(clock.Timestamp);
+        // console.log(this);
+        const d = this.getNextFrameLocation(clock.Timestamp);
+        this._location = {
+            x: this._location.x + d.x,
+            y: this._location.y + d.y,
+        };
     }
 
     Draw(ctx: CanvasRenderingContext2D): void {
@@ -79,8 +83,6 @@ export default class Vehicle implements IVehicle {
     private getNextFrameLocation(dt: number): Location {
         const nextFrameFrontWheelLocation = this.getNextFrameFrontWheelLocation(dt);
         const nextFrameBackWheelLocation = this.getNextFrameBackWheelLocation(dt);
-
-        debugger;
 
         return {
             x: (nextFrameFrontWheelLocation.x + nextFrameBackWheelLocation.x)  / 2,
