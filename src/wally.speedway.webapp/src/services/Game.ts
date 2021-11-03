@@ -23,7 +23,7 @@ export default class Game {
 
     public Start():void {
         this._clock.Start();
-        this.Draw(0);
+        this.Draw(1);
     }
 
     private Update(): void {
@@ -31,9 +31,11 @@ export default class Game {
     }
 
     private Draw(timestamp: number) {
+        // console.log(timestamp);
         this.Update();
-        this._ctx.fillText(`[${this._clock.GetTimestamp()}]`, 100, 200);
+        this._ctx.fillText(`[${timestamp}]`, 100, 200);
         this._players.forEach(a => a.Draw(this._ctx));
+        this._clock.Next();
         requestAnimationFrame(this.Draw.bind(this));
     }
 }

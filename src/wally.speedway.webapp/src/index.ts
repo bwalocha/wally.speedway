@@ -12,8 +12,6 @@ window.onload = () => {
     const game = new Game(ctx);
     game.Start();
 
-    // window.requestAnimationFrame(game.Draw);
-
     console.info('Window Loaded', ctx);
 }
 
@@ -49,7 +47,4 @@ const draw = (ctx: CanvasRenderingContext2D): void => {
     track(ctx, 0, 0, 700, 350, 54 * Math.PI);
 
     line(ctx, 350, 300, 350, 350);
-
-    // game.Draw(ctx);
-    // game.Update();
 }

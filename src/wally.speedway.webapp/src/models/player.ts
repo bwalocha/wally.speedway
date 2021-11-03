@@ -31,4 +31,8 @@ export class Player implements IDynamicSprite {
     get Key(): string {
         return this._key;
     }
+
+    public GetData(): any {
+        return this._vehicle.GetData();
+    }
 }

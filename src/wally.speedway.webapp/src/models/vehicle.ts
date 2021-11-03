@@ -13,7 +13,7 @@ export default class Vehicle implements IVehicle {
 
     private _location: Location;
     // private _velocity: number = 0;
-    private _speed: number = 0;
+    private _speed: number = 1;
     private _headingAngle: number = 0;
     private _steerAngle: number = 0;
     private _wheelBaseLength: number = 10;
@@ -29,8 +29,10 @@ export default class Vehicle implements IVehicle {
     // }
 
     public Update(clock: IClock): void {
-        console.log(this)
-        this._location.x+=1;
+        // console.log(this)
+        // this._location.x+=1;
+        console.log(this);
+        this._location = this.getNextFrameLocation(clock.Timestamp);
     }
 
     Draw(ctx: CanvasRenderingContext2D): void {
@@ -77,6 +79,9 @@ export default class Vehicle implements IVehicle {
     private getNextFrameLocation(dt: number): Location {
         const nextFrameFrontWheelLocation = this.getNextFrameFrontWheelLocation(dt);
         const nextFrameBackWheelLocation = this.getNextFrameBackWheelLocation(dt);
+
+        debugger;
+
         return {
             x: (nextFrameFrontWheelLocation.x + nextFrameBackWheelLocation.x)  / 2,
             y: (nextFrameFrontWheelLocation.y + nextFrameBackWheelLocation.y)  / 2
@@ -89,5 +94,15 @@ export default class Vehicle implements IVehicle {
 
         return Math.atan2(nextFrameFrontWheelLocation.y - nextFrameBackWheelLocation.y,
             nextFrameFrontWheelLocation.x - nextFrameBackWheelLocation.x);
+    }
+    
+    public GetData(): any {
+        return {
+            location: this._location,
+            speed: this._speed,
+            headingAngle: this._headingAngle,
+            steerAngle: this._steerAngle,
+            wheelBaseLength: this._wheelBaseLength,
+        }
     }
 }

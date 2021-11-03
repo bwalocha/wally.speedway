@@ -1,7 +1,7 @@
 import IDynamicSprite from "./IDynamicSprite";
 
 export default interface IClock {
-    GetTimestamp: () => number;
+    get Timestamp(): number;
 
     Start(): void;
 

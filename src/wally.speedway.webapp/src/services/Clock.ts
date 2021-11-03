@@ -8,8 +8,8 @@ export default class Clock implements IClock {
     private _startTimestamp: number = 0;
     private _timers: Dictionary<number> = {};
 
-    public GetTimestamp(): number {
-        return this._status == "STARTED" ? Date.now() - this._startTimestamp : 0;
+    public get Timestamp(): number {
+        return this._status === "STARTED" ? Date.now() - this._startTimestamp : 0;
     }
 
     public Start(): void {
@@ -17,9 +17,17 @@ export default class Clock implements IClock {
         this._status = "STARTED";
     }
 
+    public Next(): void {
+        if (this._status !== "STARTED") {
+            return;
+        }
+        
+        this._startTimestamp = Date.now();
+    }
+
     public GetDelta(dynamicSprite: IDynamicSprite): number {
         const lastDate = this._timers[dynamicSprite.Key];
-        this._timers[dynamicSprite.Key] = this.GetTimestamp();
+        this._timers[dynamicSprite.Key] = this.Timestamp;
         return this._timers[dynamicSprite.Key] - lastDate;
     }
 }
