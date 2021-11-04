@@ -26,7 +26,7 @@ describe('Vehicle', () => {
         expect(data).toStrictEqual({
             "headingAngle": 0,
             "location": location,
-            "speed": 1,
+            "speed": .1,
             "steerAngle": 0,
             "wheelBaseLength": 10,
         });
@@ -40,7 +40,7 @@ describe('Vehicle', () => {
         expect(data).toStrictEqual({
             "headingAngle": 0,
             "location": { ...location, x: 100 },
-            "speed": 1,
+            "speed": .1,
             "steerAngle": 0,
             "wheelBaseLength": 10,
         });
@@ -52,8 +52,8 @@ describe('Vehicle', () => {
         const data = vehicle.GetData();
         expect(data).toStrictEqual({
             "headingAngle": 0,
-            "location": { ...location, x: 10 },
-            "speed": 1,
+            "location": { ...location, x: 1 },
+            "speed": .1,
             "steerAngle": 0,
             "wheelBaseLength": 10,
         });
@@ -68,8 +68,8 @@ describe('Vehicle', () => {
         const data = vehicle.GetData();
         expect(data).toStrictEqual({
             "headingAngle": 0,
-            "location": { ...location, x: 110 },
-            "speed": 1,
+            "location": { ...location, x: 101 },
+            "speed": .1,
             "steerAngle": 0,
             "wheelBaseLength": 10,
         });
