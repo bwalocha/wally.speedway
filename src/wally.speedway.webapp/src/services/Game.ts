@@ -1,10 +1,12 @@
 import {Player} from "../models/player";
+import Track from "./../models/track";
 import IClock from "../abstractions/IClock";
 import Clock from "./../services/Clock";
 
 export default class Game {
     private _players: Player[] = [];
     private _clock: Clock = new Clock();
+    private _track: Track = new Track();
     private readonly _ctx: CanvasRenderingContext2D;
 
     constructor(ctx: CanvasRenderingContext2D) {
@@ -39,9 +41,8 @@ export default class Game {
     }
 
     private Draw(timestamp: number) {
-        // console.log(timestamp);
         this.Update();
-        this._ctx.fillText(`[${timestamp}]`, 100, 200);
+        this._track.Draw(this._ctx);
         this._players.forEach(a => a.Draw(this._ctx));
         this._clock.Next();
         requestAnimationFrame(this.Draw.bind(this));
