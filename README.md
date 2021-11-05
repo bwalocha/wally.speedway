@@ -56,7 +56,7 @@ npm i typescript -D
 tsc --init
 ```
 
-Test
+Verify
 
 ```
 node .\dist\main.js
