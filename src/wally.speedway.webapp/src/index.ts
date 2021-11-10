@@ -20,20 +20,23 @@ window.onkeyup = (e) => {
 }
 
 window.onload = () => {
+    // world canvas
     const canvas = document.getElementById("canvas") as HTMLCanvasElement;
     const ctx = canvas.getContext("2d")!;
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    // draw(ctx);
+    // collision canvas
+    const collisionCanvas = document.getElementById("collisionCanvas") as HTMLCanvasElement;
+    const collisionCtx = collisionCanvas.getContext("2d")!;
 
-    game = new Game(ctx);
+    collisionCanvas.width = window.innerWidth;
+    collisionCanvas.height = window.innerHeight;
+
+    // init game
+    game = new Game(ctx, collisionCtx);
     game.Start();
 
     console.info('Window Loaded', ctx);
 }
-
-// const draw = (ctx: CanvasRenderingContext2D): void => {
-//     ctx.clearRect(0, 0, 600, 600);
-// }

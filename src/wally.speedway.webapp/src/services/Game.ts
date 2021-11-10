@@ -8,9 +8,11 @@ export default class Game {
     private _clock: Clock = new Clock();
     private _track: Track = new Track();
     private readonly _ctx: CanvasRenderingContext2D;
+    private readonly _collisionCtx: CanvasRenderingContext2D;
 
-    constructor(ctx: CanvasRenderingContext2D) {
+    constructor(ctx: CanvasRenderingContext2D, collisionCtx: CanvasRenderingContext2D) {
         this._ctx = ctx;
+        this._collisionCtx = collisionCtx;
         this._players = [
             new Player("A", { x: 340, y: 310 }, "#FF0000"),
             new Player("B", { x: 340, y: 320 }, "#00FF00"),
@@ -25,7 +27,8 @@ export default class Game {
 
     public Start():void {
         this._clock.Start();
-        this.Draw(1);
+        this.Draw(0);
+        this._track.Draw(this._collisionCtx);
     }
 
     public StartTurn(playerIndex: number): void {
@@ -38,6 +41,13 @@ export default class Game {
 
     private Update(): void {
         this._players.forEach(a => a.Update(this._clock));
+        this._players.forEach(a => {
+            const pixel = this._collisionCtx.getImageData(Math.floor(a.Vehicle.Location.x), Math.floor(a.Vehicle.Location.y), 1, 1);
+            console.log(a.Vehicle.GetData());
+            if (pixel.data[0] != 16 && pixel.data[0] != 8 && pixel.data[0] != 0 || pixel.data[1] != 0 || pixel.data[2] != 0 /*|| pixel.data[3] != 0*/) {
+                a.Vehicle.SetCollision();
+            }
+        })
     }
 
     private Draw(timestamp: number) {

@@ -24,10 +24,9 @@ export default class Vehicle implements IVehicle {
         this._style = style;
     }
 
-    // public Turn(): void {
-    //     this._angle += 0.1;
-    //     this._velocity -= 0.1;
-    // }
+    public get Location() {
+        return this._location;
+    }
 
     public StartTurn(clock: IClock): void {
         if (this._isTurning) {
@@ -40,6 +39,10 @@ export default class Vehicle implements IVehicle {
 
     public EndTurn(clock: IClock): void {
         this._isTurning = false;
+    }
+
+    public SetCollision(): void {
+        this._location = { x: 0, y: 0 };
     }
 
     public Update(clock: IClock): void {

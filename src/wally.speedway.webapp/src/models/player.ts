@@ -20,6 +20,10 @@ export class Player implements IDynamicSprite {
         return this._name;
     }
 
+    public get Vehicle() {
+        return this._vehicle;
+    }
+
     public StartTurn(clock: IClock): void {
         this._vehicle.StartTurn(clock);
     }
